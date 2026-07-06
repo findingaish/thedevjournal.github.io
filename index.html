@@ -205,6 +205,27 @@
   @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
 </style>
 </head>
+
+<!-- Add this right before </body> -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Set up the Intersection Observer to trigger the animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+        }
+      });
+    }, { 
+      threshold: 0.1, // Triggers when 10% of the element is visible
+      rootMargin: "0px 0px -50px 0px"
+    });
+
+    // Observe all elements that have the reveal classes
+    const hiddenElements = document.querySelectorAll('.reveal, .reveal-stagger');
+    hiddenElements.forEach((el) => observer.observe(el));
+  });
+</script>
 <body>
 
 <header>
@@ -257,6 +278,7 @@
         <div class="float-badge badge-2"><span class="ico"></span>Computer Vision</div>
       </div>
     </div>
+    </section>
 
    
 
